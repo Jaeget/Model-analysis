@@ -1,0 +1,34 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def double_linked_list(head):
+    carry = 0
+    dummy = ListNode(0)
+    current = dummy
+
+    while head or carry:
+        value = (head.val if head else 0) * 2 + carry
+        carry, digit = divmod(value, 10)
+
+        current.next = ListNode(digit)
+        current = current.next
+
+        if head:
+            head = head.next
+
+    return dummy.next
+
+# Приклади використання:
+head1 = ListNode(1, ListNode(8, ListNode(9)))
+result1 = double_linked_list(head1)
+while result1:
+    print(result1.val, end=" ")
+    result1 = result1.next
+    
+head2 = ListNode(9, ListNode(9, ListNode(9)))
+result2 = double_linked_list(head2)
+while result2:
+    print(result2.val, end=" ")
+
