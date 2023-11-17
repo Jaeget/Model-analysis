@@ -1,0 +1,39 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def partition(head, x):
+    # Створення двох списків для вузлів менших та більших за x
+    less_than_x = ListNode(0)
+    greater_than_or_equal_x = ListNode(0)
+    current_less = less_than_x
+    current_greater = greater_than_or_equal_x
+
+    while head:
+        if head.val < x:
+            current_less.next = head
+            current_less = current_less.next
+        else:
+            current_greater.next = head
+            current_greater = current_greater.next
+        head = head.next
+
+    current_less.next = greater_than_or_equal_x.next
+    current_greater.next = None
+
+    return less_than_x.next
+
+# Приклади використання:
+head1 = ListNode(1, ListNode(4, ListNode(3, ListNode(2, ListNode(5, ListNode(2)))))))
+x1 = 3
+result1 = partition(head1, x1)
+while result1:
+    print(result1.val, end=" ")
+    result1 = result1.next
+
+head2 = ListNode(2, ListNode(1)))
+x2 = 2
+result2 = partition(head2, x2)
+while result2:
+    print(result2.val, end=" ")
