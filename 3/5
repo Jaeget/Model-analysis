@@ -1,0 +1,25 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+def delete_node(node):
+    if node is None or node.next is None:
+        return
+        
+    next_node = node.next
+    node.val = next_node.val
+    node.next = next_node.next
+    
+# Приклади використання:
+head1 = ListNode(4, ListNode(5, ListNode(1, ListNode(9))))
+node_to_delete1 = head1.next  # Вибираємо вузол для видалення (5)
+delete_node(node_to_delete1)
+while head1:
+    print(head1.val, end=" ")
+    head1 = head1.next
+
+head2 = ListNode(4, ListNode(5, ListNode(1, ListNode(9))))
+node_to_delete2 = head2.next.next  # Вибираємо вузол для видалення (1)
+delete_node(node_to_delete2)
+while head2:
+    print(head2.val, end=" ")
