@@ -1,0 +1,26 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def delete_duplicates(head):
+    current = head
+
+    while current is not None and current.next is not None:
+        if current.val == current.next.val:
+            current.next = current.next.next
+        else:
+            current = current.next
+    return head
+    
+# Приклади використання:
+head1 = ListNode(1, ListNode(1, ListNode(2)))
+result1 = delete_duplicates(head1)
+while result1 is not None:
+    print(result1.val, end=" ")
+
+head2 = ListNode(1, ListNode(1, ListNode(2, ListNode(3, ListNode(3)))))
+result2 = delete_duplicates(head2)
+while result2 is not None:
+    print(result2.val, end=" ")
+
