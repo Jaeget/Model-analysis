@@ -1,0 +1,48 @@
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+def reverse_k_group(head, k):
+    def reverse_list(start, end):
+        prev, current = None, start
+        while current != end:
+            temp = current.next
+            current.next = prev
+            prev = current
+            current = temp
+        return prev
+
+    dummy = ListNode(0)
+    dummy.next = head
+    prev_group_end = dummy
+    while True:
+        group_start = prev_group_end.next
+        group_end = group_start
+        for i in range(k):
+            if not group_end:
+                return dummy.next
+            group_end = group_end.next
+
+        reversed_group_start = reverse_list(group_start, group_end)
+        prev_group_end.next = reversed_group_start
+        group_start.next = group_end
+
+        prev_group_end = group_start
+
+    return dummy.next
+
+# Приклади використання:
+head1 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+k1 = 2
+result1 = reverse_k_group(head1, k1)
+while result1:
+    print(result1.val, end=" ")
+    result1 = result1.next
+
+head2 = ListNode(1, ListNode(2, ListNode(3, ListNode(4, ListNode(5)))))
+k2 = 3
+result2 = reverse_k_group(head2, k2)
+while result2:
+    print(result2.val, end=" ")
+
