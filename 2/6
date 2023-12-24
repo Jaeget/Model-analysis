@@ -1,0 +1,24 @@
+def remove_duplicates(nums):
+    if not nums:
+        return 0
+    unique_count = 1 
+    current_index = 1  
+
+    while current_index < len(nums):
+        if nums[current_index] != nums[current_index - 1]:
+            nums[unique_count] = nums[current_index]
+            unique_count += 1
+
+        current_index += 1
+
+    return unique_count
+
+# Приклад 1
+nums1 = [1, 1, 2]
+result1 = remove_duplicates(nums1)
+print(f"Приклад 1: {result1}, nums1: {nums1}")
+
+# Приклад 2
+nums2 = [0, 0, 1, 1, 1, 2, 2, 3, 3, 4]
+result2 = remove_duplicates(nums2)
+print(f"Приклад 2: {result2}, nums2: {nums2}")
