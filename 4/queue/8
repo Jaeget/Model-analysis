@@ -1,0 +1,26 @@
+def constrainedSubsetSum(nums, k):
+    n = len(nums)
+    dp = [0] * n
+
+    for i in range(n):
+        dp[i] = max(nums[i], dp[i])
+        
+        for j in range(max(0, i - k), i):
+            dp[i] = max(dp[i], dp[j] + nums[i])
+
+    return max(dp)
+
+# Приклад 1
+nums1 = [10, 2, -10, 5, 20]
+k1 = 2
+print(constrainedSubsetSum(nums1, k1))  # Вивід: 37
+
+# Приклад 2
+nums2 = [-1, -2, -3]
+k2 = 1
+print(constrainedSubsetSum(nums2, k2))  # Вивід: -1
+
+# Приклад 3
+nums3 = [10, -2, -10, -5, 20]
+k3 = 2
+print(constrainedSubsetSum(nums3, k3))  # Вивід: 23
