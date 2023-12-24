@@ -1,0 +1,52 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def recoverFromPreorder(self, traversal: str) -> TreeNode:
+        stack = []  # Стек для зберігання вузлів
+        i = 0  # Індекс у рядку traversal
+        
+        while i < len(traversal):
+            level = 0  # Глибина вузла
+            while i < len(traversal) and traversal[i] == '-':
+                level += 1
+                i += 1
+            
+            value = 0
+            while i < len(traversal) and traversal[i].isdigit():
+                value = value * 10 + int(traversal[i])
+                i += 1
+            
+            node = TreeNode(value)
+          
+            while len(stack) > level:
+                stack.pop()
+            
+            if stack:
+                if stack[-1].left is None:
+                    stack[-1].left = node
+                else:
+                    stack[-1].right = node
+            
+            stack.append(node)
+        
+        return stack[0]  # Повертаємо корінь дерева
+
+# Приклад 1
+traversal1 = "1-2--3--4-5--6--7"
+solution = Solution()
+root1 = solution.recoverFromPreorder(traversal1)
+print(f"Приклад 1: {root1}")
+
+# Приклад 2
+traversal2 = "1-2--3---4-5--6---7"
+root2 = solution.recoverFromPreorder(traversal2)
+print(f"Приклад 2: {root2}")
+
+# Приклад 3
+traversal3 = "1-401--349---90--88"
+root3 = solution.recoverFromPreorder(traversal3)
+print(f"Приклад 3: {root3}")
