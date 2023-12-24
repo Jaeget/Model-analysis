@@ -1,0 +1,33 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def kth_smallest(root, k):
+    stack = []
+    current = root
+
+    while current or stack:
+        while current:
+            stack.append(current)
+            current = current.left
+
+        current = stack.pop()
+        k -= 1
+        if k == 0:
+            return current.val
+
+        current = current.right
+
+# Приклад 1
+root1 = TreeNode(3, TreeNode(1, None, TreeNode(2)), TreeNode(4))
+k1 = 1
+result1 = kth_smallest(root1, k1)
+print(f"Приклад 1: {result1}")
+
+# Приклад 2
+root2 = TreeNode(5, TreeNode(3, TreeNode(2, TreeNode(1)), TreeNode(4)), TreeNode(6))
+k2 = 3
+result2 = kth_smallest(root2, k2)
+print(f"Приклад 2: {result2}")
