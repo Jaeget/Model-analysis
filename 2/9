@@ -1,0 +1,25 @@
+def replace_with_right_max(arr):
+    n = len(arr)
+    
+    if n == 1:
+        return [-1]
+    
+    max_right = arr[n - 1]
+    arr[n - 1] = -1
+
+    for i in range(n - 2, -1, -1):
+        temp = arr[i]
+        arr[i] = max_right
+        max_right = max(max_right, temp)
+
+    return arr
+
+# Приклад 1
+arr1 = [17, 18, 5, 4, 6, 1]
+result1 = replace_with_right_max(arr1)
+print(f"Приклад 1: {result1}")
+
+# Приклад 2
+arr2 = [400]
+result2 = replace_with_right_max(arr2)
+print(f"Приклад 2: {result2}")
