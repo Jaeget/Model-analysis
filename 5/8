@@ -1,0 +1,58 @@
+from collections import deque
+from heapq import heappush, heappop
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def verticalTraversal(self, root):
+        if not root:
+            return []
+        
+        nodes = []  # Список для зберігання вузлів та їх позицій
+        queue = deque([(root, 0, 0)])  # Використовуємо deque для обходу в ширину
+        
+        while queue:
+            node, row, col = queue.popleft()
+            heappush(nodes, (col, row, node.val))  # Зберігаємо інформацію про вузол
+            
+            if node.left:
+                queue.append((node.left, row + 1, col - 1))
+            if node.right:
+                queue.append((node.right, row + 1, col + 1))
+        
+        result = []
+        prev_col = float('-inf')
+        current_column = []
+        
+        while nodes:
+            col, row, value = heappop(nodes)
+            if col != prev_col:
+                if current_column:
+                    result.append(current_column)
+                current_column = [(value, row)]
+                prev_col = col
+            else:
+                current_column.append((value, row))
+        
+        result.append(current_column)  # Додаємо останній стовпець
+        return [[val for val, _ in col] for col in result]
+
+# Приклад 1
+root1 = TreeNode(3, TreeNode(9), TreeNode(20, TreeNode(15), TreeNode(7)))
+solution = Solution()
+result1 = solution.verticalTraversal(root1)
+print(f"Приклад 1: {result1}")
+
+# Приклад 2
+root2 = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(5)), TreeNode(3, TreeNode(6), TreeNode(7)))
+result2 = solution.verticalTraversal(root2)
+print(f"Приклад 2: {result2}")
+
+# Приклад 3
+root3 = TreeNode(1, TreeNode(2, TreeNode(4), TreeNode(6)), TreeNode(3, TreeNode(5), TreeNode(7)))
+result3 = solution.verticalTraversal(root3)
+print(f"Приклад 3: {result3}")
