@@ -1,0 +1,45 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def serialize(root):
+    def dfs(node):
+        if not node:
+            result.append("null")
+            return
+        result.append(str(node.val))
+        dfs(node.left)
+        dfs(node.right)
+
+    result = []
+    dfs(root)
+    return ",".join(result)
+
+def deserialize(data):
+    def build_tree(nodes):
+        value = nodes.pop(0)
+        if value == "null":
+            return None
+        node = TreeNode(int(value))
+        node.left = build_tree(nodes)
+        node.right = build_tree(nodes)
+        return node
+
+    nodes = data.split(",")
+    return build_tree(nodes)
+
+# Приклад 1
+root1 = TreeNode(1, TreeNode(2), TreeNode(3, TreeNode(4), TreeNode(5)))
+serialized1 = serialize(root1)
+deserialized1 = deserialize(serialized1)
+print(f"Приклад 1: {serialized1}")
+# Вивід: "1,2,3,null,null,4,5"
+
+# Приклад 2
+root2 = None
+serialized2 = serialize(root2)
+deserialized2 = deserialize(serialized2)
+print(f"Приклад 2: {serialized2}")
+# Вивід: "null"
