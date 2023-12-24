@@ -1,0 +1,45 @@
+def merge_sorted_arrays(nums1, m, nums2, n):
+    # Позначення кінця nums1 та nums2
+    end_nums1 = m - 1
+    end_nums2 = n - 1
+    # Позначення кінця ласт масиву
+    end_merged = m + n - 1
+
+    # Об’єднання масивів
+    while end_nums1 >= 0 and end_nums2 >= 0:
+        if nums1[end_nums1] >= nums2[end_nums2]:
+            nums1[end_merged] = nums1[end_nums1]
+            end_nums1 -= 1
+        else:
+            nums1[end_merged] = nums2[end_nums2]
+            end_nums2 -= 1
+        end_merged -= 1
+
+    while end_nums2 >= 0:
+        nums1[end_merged] = nums2[end_nums2]
+        end_nums2 -= 1
+        end_merged -= 1
+
+# Приклад 1
+nums1_1 = [1, 2, 3, 0, 0, 0]
+m_1 = 3
+nums2_1 = [2, 5, 6]
+n_1 = 3
+merge_sorted_arrays(nums1_1, m_1, nums2_1, n_1)
+print(f"Приклад 1: {nums1_1}")
+
+# Приклад 2
+nums1_2 = [1]
+m_2 = 1
+nums2_2 = []
+n_2 = 0
+merge_sorted_arrays(nums1_2, m_2, nums2_2, n_2)
+print(f"Приклад 2: {nums1_2}")
+
+# Приклад 3
+nums1_3 = [0]
+m_3 = 0
+nums2_3 = [1]
+n_3 = 1
+merge_sorted_arrays(nums1_3, m_3, nums2_3, n_3)
+print(f"Приклад 3: {nums1_3}")
