@@ -1,0 +1,32 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def is_symmetric(root):
+    def is_mirror(left, right):
+        if not left and not right:
+            return True
+            
+        if not left or not right:
+            return False
+        
+        return (left.val == right.val) and is_mirror(left.left, right.right) and is_mirror(left.right, right.left)
+
+    return is_mirror(root, root)
+
+# Приклад 1
+root1 = TreeNode(1, TreeNode(2, TreeNode(3), TreeNode(4)), TreeNode(2, TreeNode(4), TreeNode(3)))
+result1 = is_symmetric(root1)
+print(f"Приклад 1: {result1}")
+
+# Приклад 2
+root2 = TreeNode(1, TreeNode(2, None, TreeNode(3)), TreeNode(2, None, TreeNode(3)))
+result2 = is_symmetric(root2)
+print(f"Приклад 2: {result2}")
+
+# Приклад 3
+root3 = TreeNode(1, TreeNode(2), TreeNode(1))
+result3 = is_symmetric(root3)
+print(f"Приклад 3: {result3}")
