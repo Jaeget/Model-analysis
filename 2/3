@@ -1,0 +1,14 @@
+def sorted_squared_array(nums):
+    squared_nums = [num**2 for num in nums]
+    squared_nums.sort()
+    return squared_nums
+
+# Приклад 1
+nums1 = [-4, -1, 0, 3, 10]
+result1 = sorted_squared_array(nums1)
+print(f"Приклад 1: {result1}")
+
+# Приклад 2
+nums2 = [-7, -3, 2, 3, 11]
+result2 = sorted_squared_array(nums2)
+print(f"Приклад 2: {result2}")
