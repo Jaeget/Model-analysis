@@ -1,0 +1,40 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def minCameraCover(self, root):
+        def dfs(node):
+            nonlocal cameras, covered
+            if not node:
+                return "covered"
+            
+            left = dfs(node.left)
+            right = dfs(node.right)
+            
+            if left == "need_camera" or right == "need_camera":
+                cameras += 1
+                return "camera"
+            elif left == "camera" or right == "camera":
+                return "covered"
+            else:
+                return "need_camera"
+        
+        cameras = 0
+        covered = dfs(root)
+        return cameras + (covered == "need_camera")
+
+# Приклад 1
+root1 = TreeNode(0, None, TreeNode(0, None, TreeNode(0, None, TreeNode(0))))
+solution = Solution()
+result1 = solution.minCameraCover(root1)
+print(f"Приклад 1: {result1}")
+# Вивід: 1
+
+# Приклад 2
+root2 = TreeNode(0, None, TreeNode(0, None, TreeNode(0, None, TreeNode(0, None, TreeNode(0)))))
+result2 = solution.minCameraCover(root2)
+print(f"Приклад 2: {result2}")
+# Вивід: 2
