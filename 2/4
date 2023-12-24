@@ -1,0 +1,21 @@
+def duplicate_zeros(arr):
+    length = len(arr)
+    i = 0
+
+    while i < length:
+        if arr[i] == 0:
+            arr.insert(i, 0)
+            arr.pop()
+            i += 2  
+        else:
+            i += 1
+
+# Приклад 1
+arr1 = [1, 0, 2, 3, 0, 4, 5, 0]
+duplicate_zeros(arr1)
+print(f"Приклад 1: {arr1}")
+
+# Приклад 2
+arr2 = [1, 2, 3]
+duplicate_zeros(arr2)
+print(f"Приклад 2: {arr2}")
