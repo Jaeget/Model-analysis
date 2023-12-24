@@ -1,0 +1,16 @@
+def sort_array_by_parity(nums):
+
+    even_nums = [num for num in nums if num % 2 == 0]
+    odd_nums = [num for num in nums if num % 2 != 0]
+
+    return even_nums + odd_nums
+
+# Приклад 1
+nums1 = [3, 1, 2, 4]
+result1 = sort_array_by_parity(nums1)
+print(f"Приклад 1: {result1}")
+
+# Приклад 2
+nums2 = [0]
+result2 = sort_array_by_parity(nums2)
+print(f"Приклад 2: {result2}")
