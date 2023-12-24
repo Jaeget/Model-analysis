@@ -1,0 +1,21 @@
+def check_double(arr):
+    seen = set()
+
+    for num in arr:
+        # перевірка на існування подвійни для поточного числа
+        if num * 2 in seen or (num % 2 == 0 and num // 2 in seen):
+            return True
+
+        seen.add(num)
+
+    return False
+
+# Приклад 1
+arr1 = [10, 2, 5, 3]
+result1 = check_double(arr1)
+print(f"Приклад 1: {result1}")
+
+# Приклад 2
+arr2 = [3, 1, 7, 11]
+result2 = check_double(arr2)
+print(f"Приклад 2: {result2}")
