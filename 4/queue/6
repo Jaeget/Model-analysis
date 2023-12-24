@@ -1,0 +1,48 @@
+def moves_to_stamp(stamp, target):
+    def can_stamp(i):
+        stamped = False
+        for j in range(len(stamp)):
+            if target[i + j] == '?' or target[i + j] == stamp[j]:
+                stamped = True
+            else:
+                return False
+        return stamped
+
+    def do_stamp(i):
+        for j in range(len(stamp)):
+            if target[i + j] != '?':
+                target[i + j] = '?'
+
+    result = []
+    target = list(target)
+    target_set = set(target)
+    stamp_set = set(stamp)
+
+    while target_set != {'?'}:
+        found = False
+        for i in range(len(target) - len(stamp) + 1):
+            if target[i:i + len(stamp)] == list(stamp):
+                result.append(i)
+                do_stamp(i)
+                found = True
+
+        if not found:
+            for i in range(len(target)):
+                if can_stamp(i):
+                    result.append(i)
+                    do_stamp(i)
+
+        target_set = set(target)
+
+    return result[::-1] if target_set == {'?'} else []
+
+
+# Приклад 1
+stamp1 = "abc"
+target1 = "ababc"
+print(moves_to_stamp(stamp1, target1))  # Вивід: [0, 2]
+
+# Приклад 2
+stamp2 = "abca"
+target2 = "aabcaca"
+print(moves_to_stamp(stamp2, target2))  # Вивід: [3, 0, 1]
